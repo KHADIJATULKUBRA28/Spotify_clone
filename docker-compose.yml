@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database (Optional - use for production)
+  # postgres:
+  #   image: postgres:15-alpine
+  #   environment:
+  #     POSTGRES_USER: spotify_user
+  #     POSTGRES_PASSWORD: spotify_password
+  #     POSTGRES_DB: spotify_clone
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+
+  # FastAPI Backend
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: sqlite:///./spotify_clone.db
+      SECRET_KEY: your-super-secret-key-change-this
+      CORS_ORIGINS: '["http://localhost:3000", "http://localhost:5173", "http://127.0.0.1:3000", "http://127.0.0.1:5173"]'
+    volumes:
+      - ./Backend:/app
+      - ./Backend/uploads:/app/uploads
+    command: python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    depends_on:
+      - # postgres (uncomment if using PostgreSQL)
+
+  # React Frontend
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000
+    volumes:
+      - ./Frontend:/app
+      - /app/node_modules
+    command: npm run dev
+
+# volumes:
+#   postgres_data:
