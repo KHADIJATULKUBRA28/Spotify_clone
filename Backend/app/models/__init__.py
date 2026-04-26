@@ -64,7 +64,7 @@ class Song(Base):
     file_url = Column(String)  # S3 URL or local file path
     thumbnail_url = Column(String, nullable=True)  # Album art thumbnail
     description = Column(Text, nullable=True)
-    lyrics = Column(Text, nullable=True)  # Kannada lyrics
+    lyrics = Column(Text, nullable=True)  # Song lyrics
     play_count = Column(Integer, default=0)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

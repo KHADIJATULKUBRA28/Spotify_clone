@@ -1,6 +1,6 @@
 # Setup & Installation Guide
 
-Detailed step-by-step instructions to get the Kannada Spotify Clone running on your machine.
+Detailed step-by-step instructions to get the Spotify Clone running on your machine.
 
 ## System Requirements
 
@@ -139,14 +139,14 @@ Create `.env` file in the `Frontend` directory:
 **Windows:**
 ```cmd
 echo VITE_API_BASE_URL=http://localhost:8000 > .env
-echo VITE_APP_NAME=Kannada Spotify Clone >> .env
+echo VITE_APP_NAME=Spotify Clone >> .env
 ```
 
 **macOS/Linux:**
 ```bash
 cat > .env << 'EOF'
 VITE_API_BASE_URL=http://localhost:8000
-VITE_APP_NAME=Kannada Spotify Clone
+VITE_APP_NAME=Spotify Clone
 EOF
 ```
 
@@ -220,10 +220,10 @@ curl -X POST http://localhost:8000/api/songs \
   -d '{
     "title": "Yaarige",
     "artist": "Hamsalekshmi",
-    "album": "Kannada Collection",
-    "genre": "Kannada",
+    "album": "Music Collection",
+    "genre": "Pop",
     "duration": 240,
-    "description": "A beautiful Kannada song",
+    "description": "A beautiful song",
     "lyrics": "Yaarige nee bandha...\n"
   }'
 ```
@@ -360,7 +360,7 @@ lsof -i :5173                 # macOS/Linux
 | Variable | Default | Description |
 |----------|---------|-------------|
 | VITE_API_BASE_URL | http://localhost:8000 | Backend API URL |
-| VITE_APP_NAME | Kannada Spotify Clone | Application name |
+| VITE_APP_NAME | Spotify Clone | Application name |
 
 ---
 
@@ -401,7 +401,7 @@ npm run lint
 ## Next Steps
 
 1. Create test accounts and explore features
-2. Upload sample Kannada songs
+2. Upload sample songs
 3. Create playlists and add songs
 4. Test player functionality
 5. Customize styling and branding

@@ -1,6 +1,6 @@
 # API Documentation
 
-Complete API reference for the Kannada Spotify Clone backend.
+Complete API reference for the Spotify Clone backend.
 
 ## Base URL
 
@@ -42,9 +42,9 @@ Create a new user account.
 ```json
 {
   "email": "user@example.com",
-  "username": "kannada_lover",
+  "username": "music_lover",
   "password": "securepassword123",
-  "full_name": "Kannada Lover"
+  "full_name": "Music Lover"
 }
 ```
 
@@ -56,8 +56,8 @@ Create a new user account.
   "user": {
     "id": 1,
     "email": "user@example.com",
-    "username": "kannada_lover",
-    "full_name": "Kannada Lover",
+    "username": "music_lover",
+    "full_name": "Music Lover",
     "profile_picture": null,
     "created_at": "2024-01-15T10:30:00",
     "is_active": true
@@ -87,7 +87,7 @@ Authenticate with email and password.
   "user": {
     "id": 1,
     "email": "user@example.com",
-    "username": "kannada_lover",
+    "username": "music_lover",
     ...
   }
 }
@@ -113,8 +113,8 @@ Authorization: Bearer <token>
 {
   "id": 1,
   "email": "user@example.com",
-  "username": "kannada_lover",
-  "full_name": "Kannada Lover",
+  "username": "music_lover",
+  "full_name": "Music Lover",
   "profile_picture": "https://...",
   "created_at": "2024-01-15T10:30:00",
   "is_active": true
@@ -137,8 +137,8 @@ Authorization: Bearer <token>
 {
   "id": 1,
   "email": "user@example.com",
-  "username": "kannada_lover",
-  "full_name": "Kannada Lover",
+  "username": "music_lover",
+  "full_name": "Music Lover",
   "profile_picture": "https://...",
   "created_at": "2024-01-15T10:30:00",
   "is_active": true,
@@ -172,7 +172,7 @@ Authorization: Bearer <token>
 {
   "id": 1,
   "email": "user@example.com",
-  "username": "kannada_lover",
+  "username": "music_lover",
   "full_name": "Updated Name",
   "profile_picture": "https://...",
   ...
@@ -209,7 +209,7 @@ Get paginated list of all songs.
       "title": "Yaarige",
       "artist": "Hamsalekshmi",
       "album": "Collection",
-      "genre": "Kannada",
+      "genre": "Pop",
       "duration": 240.5,
       "file_url": "/uploads/song1.mp3",
       "thumbnail_url": "/uploads/thumb1.jpg",
@@ -234,7 +234,7 @@ Get detailed information about a specific song.
   "title": "Yaarige",
   "artist": "Hamsalekshmi",
   "album": "Collection",
-  "genre": "Kannada",
+  "genre": "Pop",
   "duration": 240.5,
   "file_url": "/uploads/song1.mp3",
   "thumbnail_url": "/uploads/thumb1.jpg",
@@ -281,7 +281,7 @@ Get songs filtered by genre.
 
 **Endpoint:** `GET /songs/genre/{genre}`
 
-**Example:** `GET /songs/genre/Kannada`
+**Example:** `GET /songs/genre/Pop`
 
 **Response:** `200 OK`
 ```json
@@ -340,7 +340,7 @@ Authorization: Bearer <token>
   "title": "New Song",
   "artist": "Artist Name",
   "album": "Album Name",
-  "genre": "Kannada",
+  "genre": "Pop",
   "duration": 240.5,
   "description": "Song description",
   "lyrics": "Song lyrics..."

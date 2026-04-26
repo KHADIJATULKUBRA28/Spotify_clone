@@ -1,6 +1,6 @@
 # Quick Start Guide
 
-Get the Kannada Spotify Clone running in 5 minutes!
+Get the Spotify Clone running in 5 minutes!
 
 ## Prerequisites Check
 

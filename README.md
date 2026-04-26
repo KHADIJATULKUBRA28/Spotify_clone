@@ -146,7 +146,7 @@ A production-ready full-stack music streaming application specialized for songs,
    ```bash
    cat > .env << EOF
    VITE_API_BASE_URL=http://localhost:8000
-   VITE_APP_NAME=Kannada Spotify Clone
+   VITE_APP_NAME=Spotify Clone
    EOF
    ```
 
@@ -340,7 +340,7 @@ Create a test account:
 
 ### Sample Songs
 To test with sample songs:
-1. Create a few sample files or use existing Kannada songs
+1. Create a few sample audio files or use existing songs
 2. Use the API to upload them
 3. Test the player and features
 
@@ -352,9 +352,9 @@ curl -X POST http://localhost:8000/api/auth/signup \
   -H "Content-Type: application/json" \
   -d '{
     "email": "user@example.com",
-    "username": "kannada_lover",
+    "username": "music_lover",
     "password": "securepassword123",
-    "full_name": "Kannada Lover"
+    "full_name": "Music Lover"
   }'
 ```
 
