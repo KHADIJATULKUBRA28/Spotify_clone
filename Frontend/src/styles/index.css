@@ -9,64 +9,267 @@
 }
 
 body {
-  background-color: #121212;
+  background-color: #0a0a0a;
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
-/* Scrollbar styling */
+/* ==================== Scrollbar ==================== */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #282828;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #404040;
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #535353;
+  background: rgba(255, 255, 255, 0.2);
 }
 
-/* Audio player */
-audio::-webkit-media-controls-panel {
-  background-color: #282828;
+/* ==================== Range Slider (Progress & Volume) ==================== */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  transition: height 0.15s ease;
 }
 
-/* Custom animations */
-@keyframes fadeIn {
+input[type='range']:hover {
+  height: 6px;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+input[type='range']:hover::-webkit-slider-thumb {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+/* ==================== Glassmorphism ==================== */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ==================== Gradients ==================== */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, #1DB954, #6C3FC5);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #1DB954, #1ed760, #6C3FC5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ==================== Animated Background ==================== */
+.animated-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-bg::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: radial-gradient(circle at 30% 40%, rgba(29, 185, 84, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 70% 60%, rgba(108, 63, 197, 0.12) 0%, transparent 50%),
+              radial-gradient(circle at 50% 80%, rgba(29, 185, 84, 0.08) 0%, transparent 40%);
+  animation: rotateBg 20s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes rotateBg {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ==================== Equalizer Animation ==================== */
+.equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 24px;
+}
+
+.equalizer-bar {
+  width: 3px;
+  background: #1DB954;
+  border-radius: 1px;
+}
+
+/* ==================== Song Card Hover ==================== */
+.song-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.song-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.song-card .play-overlay {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(8px);
+}
+
+.song-card:hover .play-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==================== Sidebar Active State ==================== */
+.nav-item {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.nav-item.active {
+  background: linear-gradient(90deg, rgba(29, 185, 84, 0.15) 0%, transparent 100%);
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: #1DB954;
+  border-radius: 0 2px 2px 0;
+}
+
+/* ==================== Player Now Playing ==================== */
+.now-playing-art {
+  transition: transform 0.3s ease;
+}
+
+.now-playing-art:hover {
+  transform: scale(1.05);
+}
+
+/* ==================== Button Interactions ==================== */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glow::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+.btn-glow:hover::after {
+  width: 200%;
+  height: 200%;
+}
+
+/* ==================== Page Transitions ==================== */
+.page-enter {
+  animation: pageEnter 0.4s ease-out;
+}
+
+@keyframes pageEnter {
   from {
     opacity: 0;
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-  to {
     transform: translateY(0);
-    opacity: 1;
   }
 }
 
-.animate-fadeIn {
-  animation: fadeIn 0.3s ease-in;
+/* ==================== Genre Badge ==================== */
+.genre-badge {
+  background: linear-gradient(135deg, rgba(29, 185, 84, 0.2), rgba(108, 63, 197, 0.2));
+  border: 1px solid rgba(29, 185, 84, 0.3);
+  transition: all 0.2s ease;
 }
 
-.animate-slideIn {
-  animation: slideIn 0.3s ease-in;
+.genre-badge:hover {
+  background: linear-gradient(135deg, rgba(29, 185, 84, 0.35), rgba(108, 63, 197, 0.35));
+  border-color: rgba(29, 185, 84, 0.5);
 }

@@ -2,7 +2,7 @@
 Songs router - song management and streaming endpoints
 """
 from fastapi import APIRouter, HTTPException, status, Depends, Query, File, UploadFile
-from fastapi.responses import FileResponse, StreamingResponse
+from fastapi.responses import FileResponse, StreamingResponse, RedirectResponse
 from sqlalchemy.orm import Session
 import os
 import shutil
@@ -126,15 +126,21 @@ async def stream_song(
             detail="Song not found"
         )
 
+    # Increment play count
+    SongService.increment_play_count(db, song_id)
+
     file_path = song.file_url
+
+    # If the file_url is an external URL, redirect to it
+    if file_path.startswith("http://") or file_path.startswith("https://"):
+        return RedirectResponse(url=file_path, status_code=302)
+
+    # Otherwise serve local file
     if not os.path.exists(file_path):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Audio file not found"
         )
-
-    # Increment play count
-    SongService.increment_play_count(db, song_id)
 
     return FileResponse(
         path=file_path,

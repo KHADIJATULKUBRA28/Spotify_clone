@@ -10,9 +10,9 @@ class Settings(BaseSettings):
     """Application settings"""
     
     # API
-    API_TITLE: str = "Kannada Spotify Clone API"
+    API_TITLE: str = "Spotify Clone API"
     API_VERSION: str = "1.0.0"
-    API_DESCRIPTION: str = "A full-stack music streaming application for Kannada songs"
+    API_DESCRIPTION: str = "A full-stack music streaming application"
     
     # Database
     DATABASE_URL: str = os.getenv(

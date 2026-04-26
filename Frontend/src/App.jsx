@@ -26,13 +26,13 @@ export default function App() {
   return (
     <Router>
       {token ? (
-        <div className="h-screen flex flex-col bg-spotify-darker">
+        <div className="h-screen flex flex-col bg-spotify-darker overflow-hidden">
           <div className="flex-1 flex overflow-hidden">
             {/* Sidebar */}
             <Sidebar />
 
             {/* Main Content */}
-            <main className="flex-1 overflow-y-auto">
+            <main className="flex-1 overflow-y-auto bg-gradient-to-b from-spotify-surface/50 to-spotify-darker">
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/search" element={<SearchPage />} />
@@ -44,7 +44,7 @@ export default function App() {
             </main>
           </div>
 
-          {/* Player */}
+          {/* Player - Fixed bottom bar */}
           <Player />
         </div>
       ) : (

@@ -1,14 +1,8 @@
-import { Music, Play, MoreVertical } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+import { Music, Play } from 'lucide-react'
 import { usePlayerStore } from '../stores/playerStore'
 
 const PlaylistCard = ({ playlist, onPlay }) => {
-  const navigate = useNavigate()
   const { setCurrentSong, setPlaylist } = usePlayerStore()
-
-  const handleClick = () => {
-    navigate(`/playlist/${playlist.id}`)
-  }
 
   const handlePlay = (e) => {
     e.stopPropagation()
@@ -22,42 +16,45 @@ const PlaylistCard = ({ playlist, onPlay }) => {
   const songCount = playlist.songs?.length || 0
 
   return (
-    <div
-      onClick={handleClick}
-      className="bg-spotify-gray hover:bg-spotify-light-gray rounded-lg p-4 transition group cursor-pointer"
-    >
+    <div className="song-card glass-card rounded-xl p-3 cursor-pointer group animate-fade-in">
       {/* Thumbnail */}
-      <div className="relative mb-4 aspect-square rounded-lg bg-spotify-dark overflow-hidden">
+      <div className="relative mb-3 aspect-square rounded-lg overflow-hidden bg-spotify-darker">
         {playlist.thumbnail_url ? (
           <img
             src={playlist.thumbnail_url}
             alt={playlist.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-spotify-accent to-purple-600">
-            <Music size={48} />
+          <div className="w-full h-full flex items-center justify-center bg-purple-accent">
+            <Music size={48} className="text-white/80" />
           </div>
         )}
-        <button
-          onClick={handlePlay}
-          className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition"
-        >
-          <Play size={32} className="text-spotify-accent ml-1" fill="currentColor" />
-        </button>
+
+        {/* Play overlay */}
+        <div className="play-overlay absolute inset-0 flex items-center justify-center bg-black/50 opacity-0">
+          <button
+            onClick={handlePlay}
+            className="w-12 h-12 rounded-full bg-spotify-accent hover:bg-spotify-accent-light hover:scale-110 transition-all flex items-center justify-center shadow-xl shadow-spotify-accent/30"
+          >
+            <Play size={22} className="text-black ml-0.5" fill="currentColor" />
+          </button>
+        </div>
       </div>
 
       {/* Info */}
-      <h3 className="font-semibold truncate text-white">{playlist.name}</h3>
-      <p className="text-sm text-gray-400 mt-1">
-        {playlist.user?.username || 'Unknown'}
+      <h3 className="font-semibold text-sm truncate text-white group-hover:text-spotify-accent transition-colors">
+        {playlist.name}
+      </h3>
+      <p className="text-xs text-gray-400 mt-0.5">
+        {playlist.user?.username || 'You'}
       </p>
-      <p className="text-xs text-gray-500">
+      <p className="text-[11px] text-gray-500 mt-0.5">
         {songCount} song{songCount !== 1 ? 's' : ''}
       </p>
 
       {playlist.description && (
-        <p className="text-xs text-gray-400 truncate mt-2 line-clamp-2">
+        <p className="text-[11px] text-gray-500 truncate mt-1.5 line-clamp-2">
           {playlist.description}
         </p>
       )}

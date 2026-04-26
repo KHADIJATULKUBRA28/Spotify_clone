@@ -1,6 +1,12 @@
-"""
-Authentication utilities - JWT token handling and password hashing
-"""
+import bcrypt
+
+# Fix for passlib compatibility with bcrypt 4.0.0+
+if not hasattr(bcrypt, "__about__"):
+    class BcryptAbout:
+        def __init__(self):
+            self.__version__ = bcrypt.__version__
+    bcrypt.__about__ = BcryptAbout()
+
 from datetime import datetime, timedelta
 from typing import Optional
 from jose import JWTError, jwt
@@ -23,13 +29,19 @@ class AuthService:
 
     @staticmethod
     def hash_password(password: str) -> str:
-        """Hash password using bcrypt"""
-        return pwd_context.hash(password)
+        """Hash password using bcrypt (truncates to 72 bytes if needed)"""
+        # Bcrypt has a 72-byte limit
+        password_bytes = password.encode('utf-8')[:72]
+        password_truncated = password_bytes.decode('utf-8', errors='ignore')
+        return pwd_context.hash(password_truncated)
 
     @staticmethod
     def verify_password(plain_password: str, hashed_password: str) -> bool:
-        """Verify password against hash"""
-        return pwd_context.verify(plain_password, hashed_password)
+        """Verify password against hash (truncates to 72 bytes if needed)"""
+        # Bcrypt has a 72-byte limit
+        password_bytes = plain_password.encode('utf-8')[:72]
+        password_truncated = password_bytes.decode('utf-8', errors='ignore')
+        return pwd_context.verify(password_truncated, hashed_password)
 
     @staticmethod
     def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:

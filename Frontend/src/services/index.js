@@ -22,7 +22,7 @@ export const songService = {
       params: { skip, limit, sort_by: sortBy, order },
     }),
   getSongById: (id) => apiClient.get(`/songs/${id}`),
-  streamSong: (id) => `${import.meta.env.VITE_API_BASE_URL}/songs/${id}/stream`,
+  streamSong: (id) => `${import.meta.env.VITE_API_BASE_URL}/api/songs/${id}/stream`,
   searchSongs: (query, skip = 0, limit = 20) =>
     apiClient.get('/songs/search', {
       params: { q: query, skip, limit },

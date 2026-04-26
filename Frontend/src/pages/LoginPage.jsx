@@ -39,24 +39,34 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-spotify-darker flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen bg-spotify-darker flex flex-col items-center justify-center p-4 relative overflow-hidden animated-bg">
+      {/* Background decorative elements */}
+      <div className="absolute top-1/4 -left-20 w-72 h-72 bg-spotify-accent/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 -right-20 w-72 h-72 bg-purple-600/10 rounded-full blur-3xl" />
+
+      <div className="w-full max-w-md relative z-10 animate-slide-up">
         {/* Logo */}
-        <div className="flex items-center justify-center gap-2 mb-8">
-          <Music className="text-spotify-accent" size={40} />
-          <h1 className="text-3xl font-bold">KannadaMusic</h1>
+        <div className="flex items-center justify-center gap-3 mb-10">
+          <div className="w-12 h-12 rounded-2xl bg-accent-gradient flex items-center justify-center shadow-lg shadow-spotify-accent/30">
+            <Music className="text-white" size={26} />
+          </div>
+          <div>
+            <span className="text-2xl font-display font-bold">Spotify</span>
+            <span className="text-2xl font-display font-light text-spotify-accent ml-1">Clone</span>
+          </div>
         </div>
 
         {/* Card */}
-        <div className="bg-spotify-gray rounded-lg p-8">
-          <h2 className="text-2xl font-bold mb-6">Login</h2>
+        <div className="glass-strong rounded-2xl p-8">
+          <h2 className="text-2xl font-display font-bold mb-1">Welcome back</h2>
+          <p className="text-sm text-gray-400 mb-6">Sign in to continue listening</p>
 
-          {error && <ErrorMessage message={error} />}
+          {error && <div className="mb-4"><ErrorMessage message={error} /></div>}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium mb-2">Email</label>
+              <label className="block text-xs font-medium text-gray-400 mb-1.5">Email address</label>
               <input
                 type="email"
                 name="email"
@@ -64,13 +74,13 @@ export default function LoginPage() {
                 onChange={handleChange}
                 placeholder="your@email.com"
                 required
-                className="w-full px-4 py-2 bg-spotify-dark rounded-lg border border-spotify-light-gray focus:border-spotify-accent focus:outline-none"
+                className="w-full px-4 py-3 glass rounded-xl text-sm focus:ring-1 focus:ring-spotify-accent/50 focus:outline-none placeholder-gray-500 transition"
               />
             </div>
 
             {/* Password */}
             <div>
-              <label className="block text-sm font-medium mb-2">Password</label>
+              <label className="block text-xs font-medium text-gray-400 mb-1.5">Password</label>
               <input
                 type="password"
                 name="password"
@@ -78,7 +88,7 @@ export default function LoginPage() {
                 onChange={handleChange}
                 placeholder="••••••••"
                 required
-                className="w-full px-4 py-2 bg-spotify-dark rounded-lg border border-spotify-light-gray focus:border-spotify-accent focus:outline-none"
+                className="w-full px-4 py-3 glass rounded-xl text-sm focus:ring-1 focus:ring-spotify-accent/50 focus:outline-none placeholder-gray-500 transition"
               />
             </div>
 
@@ -86,21 +96,33 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2 bg-spotify-accent text-black font-semibold rounded-lg hover:bg-green-500 disabled:opacity-50 transition flex items-center justify-center gap-2"
+              className="w-full py-3 bg-spotify-accent text-black font-bold rounded-xl hover:bg-spotify-accent-light disabled:opacity-50 transition-all hover:shadow-lg hover:shadow-spotify-accent/20 flex items-center justify-center gap-2 text-sm btn-glow"
             >
               {loading && <LoadingSpinner size="sm" />}
-              {loading ? 'Logging in...' : 'Login'}
+              {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 
+          {/* Divider */}
+          <div className="flex items-center gap-4 my-6">
+            <div className="flex-1 h-px bg-white/10" />
+            <span className="text-xs text-gray-500">or</span>
+            <div className="flex-1 h-px bg-white/10" />
+          </div>
+
           {/* Sign up link */}
-          <p className="text-center text-gray-400 mt-4">
+          <p className="text-center text-sm text-gray-400">
             Don't have an account?{' '}
-            <Link to="/signup" className="text-spotify-accent hover:underline">
-              Sign up
+            <Link to="/signup" className="text-spotify-accent hover:text-spotify-accent-light font-medium transition">
+              Sign up free
             </Link>
           </p>
         </div>
+
+        {/* Footer */}
+        <p className="text-center text-xs text-gray-600 mt-6">
+          Built with ♥ • Spotify Clone
+        </p>
       </div>
     </div>
   )
