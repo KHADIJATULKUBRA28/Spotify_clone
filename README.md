@@ -1,6 +1,6 @@
-# 🎵 Kannada Spotify Clone - Full-Stack Music Streaming Application
+# 🎵 Spotify Clone - Full-Stack Music Streaming Application
 
-A production-ready full-stack music streaming application specialized for Kannada songs, built with modern web technologies.
+A production-ready full-stack music streaming application specialized for songs, built with modern web technologies.
 
 ## 🚀 Features
 
@@ -12,7 +12,7 @@ A production-ready full-stack music streaming application specialized for Kannad
 - ✅ Profile picture upload
 
 ### 2. **Music Management**
-- ✅ Upload Kannada songs (audio files)
+- ✅ Upload songs (audio files)
 - ✅ Store song metadata (title, artist, album, genre, duration)
 - ✅ Thumbnail upload for songs
 - ✅ Stream audio files efficiently
